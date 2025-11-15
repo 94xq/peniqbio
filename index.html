@@ -7,57 +7,93 @@
 <link rel="stylesheet" type="text/css" href="styles.css"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
+<style>
+/* Hide default cursor */
+body {
+    cursor: none;
+}
+
+/* Custom cursor */
+#custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+    background: url('./assets/cursor/pointer.png') no-repeat center center;
+    background-size: contain;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    z-index: 9999;
+}
+
+/* Hover effect on links */
+a:hover, .links a:hover {
+    transform: scale(1.2) translate(-50%, -50%);
+}
+</style>
 </head>
 <body class="custom-cursor">
 
-  <!-- Background Elements -->
-  <div id="video-background">
+<!-- Custom Cursor -->
+<div id="custom-cursor"></div>
+
+<!-- Background Elements -->
+<div id="video-background">
     <video autoplay muted loop id="myVideo">
-      <source src="./assets/back/default.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
+        <source src="./assets/back/default.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
     </video>
 
     <audio autoplay loop id="myAudio">
-      <source src="./assets/music/default.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
+        <source src="./assets/music/default.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
 
     <div id="blurred-box">
-      <!-- Profile Picture only -->
-      <img id="profile-picture" src="./assets/pfp/default.jpg" alt="">
+        <!-- Profile Picture only -->
+        <img id="profile-picture" src="./assets/pfp/default.jpg" alt="">
 
-      <p id="username" style="color: white; font-weight: bold; font-size: large;">vebe</p>
-      <div class="user-description">
-        <p id="user-description" style="color: white;"></p>
-      </div>
+        <p id="username" style="color: white; font-weight: bold; font-size: large;">vebe</p>
+        <div class="user-description">
+            <p id="user-description" style="color: white;"></p>
+        </div>
 
-      <!-- Links -->
-      <div class="links">
-        <a href="https://github.com/94xq" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.paypal.com/paypalme/oixl" target="_blank"><i class="fa-brands fa-paypal"></i></a>
-      </div>
+        <!-- Links -->
+        <div class="links">
+            <a href="https://github.com/94xq" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.paypal.com/paypalme/oixl" target="_blank"><i class="fa-brands fa-paypal"></i></a>
+        </div>
     </div>
-  </div>
+</div>
 
-  <!-- Scripts -->
-  <script>
-    const audio = document.getElementById('myAudio');
+<!-- Scripts -->
+<script>
+const audio = document.getElementById('myAudio');
 
-    // Attempt autoplay immediately
-    window.addEventListener('load', () => {
-      audio.play().catch(() => {
+// Attempt autoplay immediately
+window.addEventListener('load', () => {
+    audio.play().catch(() => {
         console.log("Autoplay blocked. Will play on next interaction.");
-      });
     });
+});
 
-    // Fallback if blocked
-    document.body.addEventListener('click', () => {
-      if (audio.paused) audio.play();
-    }, { once: true });
-  </script>
+// Fallback if blocked
+document.body.addEventListener('click', () => {
+    if (audio.paused) audio.play();
+}, { once: true });
 
-  <script src="./assets/js/script.js"></script>
-  <script src="./assets/js/title.js"></script>
-  <script src="./assets/js/discord.js"></script>
+// Custom cursor
+const cursor = document.getElementById('custom-cursor');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+});
+</script>
+
+<script src="./assets/js/script.js"></script>
+<script src="./assets/js/title.js"></script>
+<script src="./assets/js/discord.js"></script>
 </body>
 </html>
