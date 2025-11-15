@@ -9,8 +9,16 @@
 <link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
 </head>
 <body class="custom-cursor">
+
+  <!-- Click-to-Enter Overlay -->
+  <div id="enter-screen">
+    <div id="enter-message">
+      <p>Click to continue</p>
+    </div>
+  </div>
+
   <!-- Background Elements -->
-  <div id="video-background">
+  <div id="video-background" style="display: none;">
     <video autoplay muted loop id="myVideo">
       <source src="./assets/back/default.mp4" type="video/mp4">
       Your browser does not support HTML5 video.
@@ -22,30 +30,47 @@
     </audio>
 
     <div id="blurred-box">
-      <!-- Discord Avatar and Frame -->
-      <img id="profile-picture" src="./assets/pfp/default.jpg" alt="Profile Picture">
-      <img id="avatar-frame" src="./assets/pfp/frame.png" alt="Avatar Frame"> <!-- Fixed frame -->
+      <!-- Profile Picture + Frame -->
+      <img id="profile-picture" src="./assets/pfp/default.jpg" alt="">
+      <img id="avatar-frame" src="./assets/pfp/frame.png" alt="" title="">
 
       <p id="username" style="color: white; font-weight: bold; font-size: large;">Peniq</p>
       <div class="user-description">
         <p id="user-description" style="color: white;">made with ❤️</p>
       </div>
 
+      <!-- Links -->
       <div class="links">
-        <a href="https://soundcloud.com/nightyouth1337" target="_blank">
-          <i class="fab fa-soundcloud"></i>
-        </a>
-        <a href="https://github.com/Yoghurt1337" target="_blank">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.paypal.com/paypalme/lilpeepvb1" target="_blank">
-          <i class="fa-brands fa-paypal"></i>
-        </a>
+        <a href="https://soundcloud.com/nightyouth1337" target="_blank"><i class="fab fa-soundcloud"></i></a>
+        <a href="https://github.com/Yoghurt1337" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.paypal.com/paypalme/lilpeepvb1" target="_blank"><i class="fa-brands fa-paypal"></i></a>
       </div>
     </div>
   </div>
 
   <!-- Scripts -->
+  <script>
+    const enterScreen = document.getElementById('enter-screen');
+    const videoBackground = document.getElementById('video-background');
+    const audio = document.getElementById('myAudio');
+
+    // Click-to-enter functionality
+    enterScreen.addEventListener('click', () => {
+      enterScreen.style.display = 'none';      // hide overlay
+      videoBackground.style.display = 'block'; // show profile
+
+      // Attempt to play audio immediately
+      audio.play().catch(() => {
+        console.log("Autoplay was blocked. Audio will play on next user interaction.");
+      });
+    });
+
+    // Optional: trigger audio on any interaction if blocked
+    document.body.addEventListener('click', () => {
+      if (audio.paused) audio.play();
+    }, { once: true });
+  </script>
+
   <script src="./assets/js/script.js"></script>
   <script src="./assets/js/title.js"></script>
   <script src="./assets/js/discord.js"></script>
