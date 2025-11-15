@@ -10,15 +10,8 @@
 </head>
 <body class="custom-cursor">
 
-  <!-- Click-to-Enter Overlay -->
-  <div id="enter-screen">
-    <div id="enter-message">
-      <p>Click to continue</p>
-    </div>
-  </div>
-
   <!-- Background Elements -->
-  <div id="video-background" style="display: none;">
+  <div id="video-background">
     <video autoplay muted loop id="myVideo">
       <source src="./assets/back/default.mp4" type="video/mp4">
       Your browser does not support HTML5 video.
@@ -30,9 +23,8 @@
     </audio>
 
     <div id="blurred-box">
-      <!-- Profile Picture + Frame -->
+      <!-- Profile Picture only -->
       <img id="profile-picture" src="./assets/pfp/default.jpg" alt="">
-      <img id="avatar-frame" src="./assets/pfp/frame.png" alt="" title="">
 
       <p id="username" style="color: white; font-weight: bold; font-size: large;">vebe</p>
       <div class="user-description">
@@ -41,7 +33,6 @@
 
       <!-- Links -->
       <div class="links">
-        <a href="https://pornhub.com" target="_blank"><i class="fab fa-soundcloud"></i></a>
         <a href="https://github.com/94xq" target="_blank"><i class="fab fa-github"></i></a>
         <a href="https://www.paypal.com/paypalme/oixl" target="_blank"><i class="fa-brands fa-paypal"></i></a>
       </div>
@@ -50,22 +41,16 @@
 
   <!-- Scripts -->
   <script>
-    const enterScreen = document.getElementById('enter-screen');
-    const videoBackground = document.getElementById('video-background');
     const audio = document.getElementById('myAudio');
 
-    // Click-to-enter functionality
-    enterScreen.addEventListener('click', () => {
-      enterScreen.style.display = 'none';      // hide overlay
-      videoBackground.style.display = 'block'; // show profile
-
-      // Attempt to play audio immediately
+    // Attempt autoplay immediately
+    window.addEventListener('load', () => {
       audio.play().catch(() => {
         console.log("Autoplay blocked. Will play on next interaction.");
       });
     });
 
-    // Trigger audio if blocked
+    // Fallback if blocked
     document.body.addEventListener('click', () => {
       if (audio.paused) audio.play();
     }, { once: true });
