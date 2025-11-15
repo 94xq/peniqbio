@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yoghurt1337 Profile</title>
-<link rel="stylesheet" href="styles.css"> 
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
 </head>
@@ -23,41 +23,38 @@
       Your browser does not support the audio element.
     </audio>
 
-    <!-- Profile Content -->
-    <div id="blurred-box">
-      <img id="profile-picture" src="./assets/pfp/default.jpg" alt="Profile Picture">
-      <p id="username" style="color: white; font-weight: bold; font-size: large;">Yoghurt1337</p>
-
-      <div class="user-description">
-        <p id="user-description" style="color: white;">made with ❤️</p>
+    <!-- Profile Box -->
+    <div id="profile-box">
+      <div id="profile-container">
+        <img id="profile-picture" src="./assets/pfp/default.jpg" alt="Profile Picture">
+        <img id="avatar-frame" src="./assets/pfp/frame.png" alt="Avatar Frame">
+        <p id="username">Yoghurt1337</p>
+        <p id="user-description">made with ❤️</p>
       </div>
 
-      <div class="links">
+      <!-- Social Links -->
+      <div id="links">
         <a href="https://soundcloud.com/nightyouth1337" target="_blank">
           <i class="fab fa-soundcloud"></i>
-        </a> 
+        </a>
         <a href="https://github.com/Yoghurt1337" target="_blank">
-          <i class="fab fa-github"></i> 
-        </a> 
+          <i class="fab fa-github"></i>
+        </a>
         <a href="https://www.paypal.com/paypalme/lilpeepvb1" target="_blank">
           <i class="fa-brands fa-paypal"></i>
-        </a> 
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- JS Scripts -->
-  <script src="./assets/js/discord.js"></script>
+  <!-- Scripts -->
   <script>
-    // Ensure video and audio load correctly
     const video = document.getElementById("myVideo");
     const audio = document.getElementById("myAudio");
 
     video.onerror = () => console.log("Video failed to load!");
     audio.onerror = () => console.log("Audio failed to load!");
-
-    // Optional: add simple cursor trail or custom effects here
-    // Removed references to old terminal/start screen
   </script>
+
 </body>
 </html>
