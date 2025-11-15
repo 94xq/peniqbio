@@ -28,6 +28,8 @@
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
+  position: relative;
+  z-index: 1;
 }
 
 #avatar-frame {
@@ -37,7 +39,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none; /* prevent blocking clicks */
+  pointer-events: none;
+  z-index: 2;
 }
 
 .links a {
