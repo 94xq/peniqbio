@@ -61,11 +61,11 @@
 
       // Attempt to play audio immediately
       audio.play().catch(() => {
-        console.log("Autoplay was blocked. Audio will play on next user interaction.");
+        console.log("Autoplay blocked. Will play on next interaction.");
       });
     });
 
-    // Optional: trigger audio on any interaction if blocked
+    // Trigger audio if blocked
     document.body.addEventListener('click', () => {
       if (audio.paused) audio.play();
     }, { once: true });
