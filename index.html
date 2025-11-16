@@ -15,7 +15,7 @@ body {
     cursor: url("./assets/cursor/pointer.png") 8 8, auto;
 }
 
-/* Smooth cursor follow dot */
+/* Smooth cursor dot */
 #cursor-dot {
     width: 20px;
     height: 20px;
@@ -28,7 +28,7 @@ body {
     z-index: 1000;
 }
 
-/* Snow/rain canvas */
+/* Snow canvas */
 #effects-canvas {
     position: fixed;
     top: 0;
@@ -46,7 +46,7 @@ body {
 <!-- Smooth cursor dot -->
 <div id="cursor-dot"></div>
 
-<!-- Effects Canvas -->
+<!-- Snow Canvas -->
 <canvas id="effects-canvas"></canvas>
 
 <!-- Background + Profile -->
@@ -71,14 +71,13 @@ body {
         </div>
 
         <div class="links">
-            <!-- Removed soundcloud -->
             <a href="https://github.com/94xq" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.paypal.com/paypalme/oixl" target="_blank"><i class="fa-brands fa-paypal"></i></a>
         </div>
     </div>
 </div>
 
-<!-- Smooth cursor follow script -->
+<!-- Smooth cursor movement -->
 <script>
 const dot = document.getElementById("cursor-dot");
 document.addEventListener("mousemove", e => {
@@ -86,7 +85,7 @@ document.addEventListener("mousemove", e => {
 });
 </script>
 
-<!-- Auto-play audio fix -->
+<!-- Auto-play fix -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const audio = document.getElementById("myAudio");
@@ -96,13 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- Snow + Rain Effect -->
+<!-- ❄ SNOW ONLY (NO RAIN, NO CURSOR PARTICLES) -->
 <script>
 const canvas = document.getElementById("effects-canvas");
 const ctx = canvas.getContext("2d");
 
 let snow = [];
-let rain = [];
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -116,25 +114,15 @@ function createSnowflake() {
         x: Math.random() * canvas.width,
         y: -10,
         size: Math.random() * 3 + 1.5,
-        speed: Math.random() * 0.8 + 0.2,
-        drift: Math.random() * 0.6 - 0.3
+        speed: Math.random() * 1.2 + 0.4,
+        drift: Math.random() * 1 - 0.5
     };
 }
 
-function createRainDrop() {
-    return {
-        x: Math.random() * canvas.width,
-        y: -10,
-        length: Math.random() * 20 + 10,
-        speed: Math.random() * 4 + 3
-    };
-}
-
-function updateEffects() {
+function updateSnow() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (snow.length < 120) snow.push(createSnowflake());
-    if (rain.length < 80) rain.push(createRainDrop());
+    if (snow.length < 150) snow.push(createSnowflake());
 
     snow.forEach((flake, i) => {
         flake.y += flake.speed;
@@ -148,23 +136,10 @@ function updateEffects() {
         if (flake.y > canvas.height) snow.splice(i, 1);
     });
 
-    ctx.strokeStyle = "rgba(180,180,255,0.6)";
-    ctx.lineWidth = 1.2;
-    rain.forEach((drop, i) => {
-        drop.y += drop.speed;
-
-        ctx.beginPath();
-        ctx.moveTo(drop.x, drop.y);
-        ctx.lineTo(drop.x, drop.y + drop.length);
-        ctx.stroke();
-
-        if (drop.y > canvas.height) rain.splice(i, 1);
-    });
-
-    requestAnimationFrame(updateEffects);
+    requestAnimationFrame(updateSnow);
 }
 
-updateEffects();
+updateSnow();
 </script>
 
 <script src="./assets/js/script.js"></script>
