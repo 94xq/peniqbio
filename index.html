@@ -4,58 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Peniq Profile</title>
-
 <link rel="stylesheet" type="text/css" href="styles.css"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
-
 <style>
-/* Custom cursor */
+/* Hide default cursor */
 body {
-    cursor: url("./assets/cursor/pointer.gif") 8 8, auto;
+    cursor: none;
 }
 
-/* Smooth cursor dot */
-#cursor-dot {
-    width: 20px;
-    height: 20px;
-    background: white;
-    border-radius: 50%;
+/* Custom cursor */
+#custom-cursor {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
     pointer-events: none;
+    background: url('./assets/cursor/pointer.gif') no-repeat center center;
+    background-size: contain;
     transform: translate(-50%, -50%);
-    transition: transform 0.12s linear;
-    z-index: 1000;
+    transition: transform 0.1s ease;
+    z-index: 9999;
+}
+
+/* Hover effect on links */
+a:hover, .links a:hover {
+    transform: scale(1.2) translate(-50%, -50%);
 }
 </style>
-
 </head>
-<body>
+<body class="custom-cursor">
 
-<!-- Smooth cursor dot -->
-<div id="cursor-dot"></div>
+<!-- Custom Cursor -->
+<div id="custom-cursor"></div>
 
-<!-- Background + Profile -->
+<!-- Background Elements -->
 <div id="video-background">
     <video autoplay muted loop id="myVideo">
-      <source src="./assets/back/default.mp4" type="video/mp4">
+        <source src="./assets/back/default.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
     </video>
 
     <audio autoplay loop id="myAudio">
         <source src="./assets/music/default.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
 
     <div id="blurred-box">
+        <!-- Profile Picture only -->
         <img id="profile-picture" src="./assets/pfp/default.jpg" alt="">
 
-        <p id="username" style="color: white; font-weight: bold; font-size: large;">
-            vebe
-        </p>
-
+        <p id="username" style="color: white; font-weight: bold; font-size: large;">vebe</p>
         <div class="user-description">
             <p id="user-description" style="color: white;"></p>
         </div>
 
+        <!-- Links -->
         <div class="links">
             <a href="https://github.com/94xq" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.paypal.com/paypalme/oixl" target="_blank"><i class="fa-brands fa-paypal"></i></a>
@@ -63,26 +68,32 @@ body {
     </div>
 </div>
 
-<!-- Smooth cursor movement -->
+<!-- Scripts -->
 <script>
-const dot = document.getElementById("cursor-dot");
-document.addEventListener("mousemove", e => {
-    dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-});
-</script>
+const audio = document.getElementById('myAudio');
 
-<!-- Auto-play audio fix -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const audio = document.getElementById("myAudio");
+// Attempt autoplay immediately
+window.addEventListener('load', () => {
     audio.play().catch(() => {
-        document.body.addEventListener("click", () => audio.play(), { once: true });
+        console.log("Autoplay blocked. Will play on next interaction.");
     });
+});
+
+// Fallback if blocked
+document.body.addEventListener('click', () => {
+    if (audio.paused) audio.play();
+}, { once: true });
+
+// Custom cursor
+const cursor = document.getElementById('custom-cursor');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
 });
 </script>
 
 <script src="./assets/js/script.js"></script>
 <script src="./assets/js/title.js"></script>
-
+<script src="./assets/js/discord.js"></script>
 </body>
 </html>
