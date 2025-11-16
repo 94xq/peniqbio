@@ -10,9 +10,9 @@
 <link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
 
 <style>
-/* Custom Cursor */
+/* Custom cursor */
 body {
-    cursor: url("./assets/cursor/pointer.png") 8 8, auto;
+    cursor: url("./assets/cursor/pointer.gif") 8 8, auto;
 }
 
 /* Smooth cursor dot */
@@ -27,17 +27,6 @@ body {
     transition: transform 0.12s linear;
     z-index: 1000;
 }
-
-/* Snow canvas */
-#effects-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 5;
-}
 </style>
 
 </head>
@@ -45,9 +34,6 @@ body {
 
 <!-- Smooth cursor dot -->
 <div id="cursor-dot"></div>
-
-<!-- Snow Canvas -->
-<canvas id="effects-canvas"></canvas>
 
 <!-- Background + Profile -->
 <div id="video-background">
@@ -85,7 +71,7 @@ document.addEventListener("mousemove", e => {
 });
 </script>
 
-<!-- Auto-play fix -->
+<!-- Auto-play audio fix -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const audio = document.getElementById("myAudio");
@@ -93,53 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.addEventListener("click", () => audio.play(), { once: true });
     });
 });
-</script>
-
-<!-- ❄ SNOW ONLY (NO RAIN, NO CURSOR PARTICLES) -->
-<script>
-const canvas = document.getElementById("effects-canvas");
-const ctx = canvas.getContext("2d");
-
-let snow = [];
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-function createSnowflake() {
-    return {
-        x: Math.random() * canvas.width,
-        y: -10,
-        size: Math.random() * 3 + 1.5,
-        speed: Math.random() * 1.2 + 0.4,
-        drift: Math.random() * 1 - 0.5
-    };
-}
-
-function updateSnow() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    if (snow.length < 150) snow.push(createSnowflake());
-
-    snow.forEach((flake, i) => {
-        flake.y += flake.speed;
-        flake.x += flake.drift;
-
-        ctx.beginPath();
-        ctx.arc(flake.x, flake.y, flake.size, 0, Math.PI * 2);
-        ctx.fillStyle = "white";
-        ctx.fill();
-
-        if (flake.y > canvas.height) snow.splice(i, 1);
-    });
-
-    requestAnimationFrame(updateSnow);
-}
-
-updateSnow();
 </script>
 
 <script src="./assets/js/script.js"></script>
