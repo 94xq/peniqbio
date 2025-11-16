@@ -10,24 +10,31 @@
 <link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
 
 <style>
-/* Hide default cursor */
-body {
-    cursor: none;
+/* Hide default cursor everywhere */
+html, body, * {
+    cursor: none !important;
 }
 
 /* Custom cursor */
 #custom-cursor {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 32px;
     height: 32px;
     pointer-events: none;
     background: url('./assets/cursor/pointer.png') no-repeat center center;
     background-size: contain;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease;
+    transition: transform 0.1s ease, opacity 0.2s ease;
     z-index: 9999;
+
+    /* Spin animation */
+    animation: spin 4s linear infinite;
+}
+
+/* Spin keyframes */
+@keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* CLICK TO ENTER SCREEN */
@@ -68,7 +75,7 @@ body {
 }
 </style>
 </head>
-<body class="custom-cursor">
+<body>
 
 <!-- Custom Cursor -->
 <div id="custom-cursor"></div>
@@ -116,31 +123,31 @@ const enterScreen = document.getElementById("enter-screen");
 const siteContent = document.getElementById("site-content");
 const video = document.getElementById("myVideo");
 const audio = document.getElementById("myAudio");
+const ccursor = document.getElementById('custom-cursor');
 
 // CLICK TO ENTER ANIMATION
 enterScreen.addEventListener("click", () => {
-
-    // Fade out the blur overlay
+    // Fade out the overlay
     enterScreen.style.opacity = "0";
-
-    setTimeout(() => {
-        enterScreen.style.display = "none";
-    }, 900);
+    setTimeout(() => { enterScreen.style.display = "none"; }, 900);
 
     // Fade site in
     siteContent.style.opacity = "1";
 
-    // Play video + audio after click
+    // Play video + audio
     video.play().catch(() => {});
     audio.play().catch(() => {});
 });
 
-// Custom cursor
-const ccursor = document.getElementById('custom-cursor');
-
+// Custom cursor movement
 document.addEventListener('mousemove', (e) => {
-    ccursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    ccursor.style.left = `${e.clientX}px`;
+    ccursor.style.top = `${e.clientY}px`;
 });
+
+// Optional: cursor click feedback
+document.addEventListener('mousedown', () => ccursor.style.opacity = 0.6);
+document.addEventListener('mouseup', () => ccursor.style.opacity = 1);
 </script>
 
 <script src="./assets/js/script.js"></script>
