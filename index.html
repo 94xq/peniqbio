@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Peniq Profile</title>
+
 <link rel="stylesheet" type="text/css" href="styles.css"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
+
 <style>
 /* Hide default cursor */
 body {
@@ -21,16 +23,48 @@ body {
     width: 32px;
     height: 32px;
     pointer-events: none;
-    background: url('./assets/cursor/pointer.gif') no-repeat center center;
+    background: url('./assets/cursor/pointer.png') no-repeat center center;
     background-size: contain;
     transform: translate(-50%, -50%);
     transition: transform 0.1s ease;
     z-index: 9999;
 }
 
-/* Hover effect on links */
-a:hover, .links a:hover {
-    transform: scale(1.2) translate(-50%, -50%);
+/* CLICK TO ENTER SCREEN */
+#enter-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+#enter-message {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 0 0 10px black;
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+/* Hide site content until activated */
+#site-content {
+    opacity: 0;
+    transition: opacity 1.2s ease;
 }
 </style>
 </head>
@@ -39,28 +73,33 @@ a:hover, .links a:hover {
 <!-- Custom Cursor -->
 <div id="custom-cursor"></div>
 
+<!-- CLICK TO ENTER OVERLAY -->
+<div id="enter-screen">
+    <div id="enter-message">Click to Enter</div>
+</div>
+
+<!-- EVERYTHING BELOW IS LOCKED UNTIL CLICKED -->
+<div id="site-content">
+
 <!-- Background Elements -->
 <div id="video-background">
-    <video autoplay muted loop id="myVideo">
+    <video muted loop id="myVideo">
         <source src="./assets/back/default.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
     </video>
 
-    <audio autoplay loop id="myAudio">
+    <audio loop id="myAudio">
         <source src="./assets/music/default.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
     <div id="blurred-box">
-        <!-- Profile Picture only -->
         <img id="profile-picture" src="./assets/pfp/default.jpg" alt="">
 
         <p id="username" style="color: white; font-weight: bold; font-size: large;">vebe</p>
+
         <div class="user-description">
             <p id="user-description" style="color: white;"></p>
         </div>
 
-        <!-- Links -->
         <div class="links">
             <a href="https://github.com/94xq" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.paypal.com/paypalme/oixl" target="_blank"><i class="fa-brands fa-paypal"></i></a>
@@ -68,32 +107,44 @@ a:hover, .links a:hover {
     </div>
 </div>
 
+</div> <!-- end site-content -->
+
 <!-- Scripts -->
 <script>
-const audio = document.getElementById('myAudio');
+// Elements
+const enterScreen = document.getElementById("enter-screen");
+const siteContent = document.getElementById("site-content");
+const video = document.getElementById("myVideo");
+const audio = document.getElementById("myAudio");
 
-// Attempt autoplay immediately
-window.addEventListener('load', () => {
-    audio.play().catch(() => {
-        console.log("Autoplay blocked. Will play on next interaction.");
-    });
+// CLICK TO ENTER ANIMATION
+enterScreen.addEventListener("click", () => {
+
+    // Fade out the blur overlay
+    enterScreen.style.opacity = "0";
+
+    setTimeout(() => {
+        enterScreen.style.display = "none";
+    }, 900);
+
+    // Fade site in
+    siteContent.style.opacity = "1";
+
+    // Play video + audio after click
+    video.play().catch(() => {});
+    audio.play().catch(() => {});
 });
 
-// Fallback if blocked
-document.body.addEventListener('click', () => {
-    if (audio.paused) audio.play();
-}, { once: true });
-
 // Custom cursor
-const cursor = document.getElementById('custom-cursor');
+const ccursor = document.getElementById('custom-cursor');
 
 document.addEventListener('mousemove', (e) => {
-    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    ccursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
 });
 </script>
 
 <script src="./assets/js/script.js"></script>
 <script src="./assets/js/title.js"></script>
-<script src="./assets/js/discord.js"></script>
+
 </body>
 </html>
