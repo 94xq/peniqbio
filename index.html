@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site</title>
     
-    <!-- Favicon from favico folder -->
-    <link rel="icon" href="favico/favicon.ico">
+    <!-- Link to your existing styles.css if you want to keep it -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
     
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: url('cursor/cursor.png'), auto; /* Custom cursor from cursor folder */
+            cursor: url('assets/pointer.png'), auto; /* Custom cursor from assets folder */
         }
         
         body {
@@ -30,7 +30,7 @@
             position: relative;
         }
         
-        /* BANNER - TOP OF SCREEN - from back folder */
+        /* BANNER - TOP OF SCREEN */
         #banner {
             width: 100%;
             height: 200px;
@@ -45,7 +45,7 @@
             display: block;
         }
         
-        /* PROFILE PICTURE - OVER BANNER - from pfp folder */
+        /* PROFILE PICTURE - OVER BANNER */
         .profile-overlay {
             position: absolute;
             bottom: -50px;
@@ -62,7 +62,7 @@
             background: #222222;
         }
         
-        /* THIN PLANE THAT FOLLOWS MOUSE - using back2 folder image */
+        /* THIN PLANE THAT FOLLOWS MOUSE */
         .plane-container {
             position: absolute;
             top: 50%;
@@ -117,7 +117,7 @@
             padding: 15px 40px;
             font-size: 20px;
             font-weight: bold;
-            cursor: url('cursor/cursor.png'), pointer; /* Custom cursor on button */
+            cursor: url('assets/pointer.png'), pointer; /* Custom cursor on button */
             z-index: 10;
         }
         
@@ -143,23 +143,23 @@
 <body>
     <!-- HEADER WITH BANNER AND PROFILE -->
     <div class="header">
-        <!-- Banner at top of screen - from back folder -->
+        <!-- Banner at top of screen -->
         <div id="banner">
-            <img id="banner-img" src="back/banner.png" alt="Banner">
+            <img id="banner-img" src="assets/banner.png" alt="Banner">
         </div>
         
-        <!-- Profile picture overlapping banner - from pfp folder -->
+        <!-- Profile picture overlapping banner -->
         <div class="profile-overlay">
-            <img class="profile-circle" src="pfp/profile.png" alt="Profile">
+            <img class="profile-circle" src="assets/profile.png" alt="Profile">
         </div>
     </div>
     
-    <!-- THIN PLANE THAT FOLLOWS MOUSE - using back2 folder image -->
+    <!-- THIN PLANE THAT FOLLOWS MOUSE -->
     <div class="plane-container">
         <div class="plane" id="plane">
             <!-- Single thin plane face -->
             <div class="plane-face plane-front">
-                <img class="plane-image" src="back2/background.png" alt="Plane Image" id="planeImage">
+                <img class="plane-image" src="assets/background.png" alt="Plane Image" id="planeImage">
             </div>
         </div>
     </div>
@@ -199,24 +199,24 @@
             plane.style.transform = 'rotateX(0deg) rotateY(0deg)';
         });
         
-        // Image loading with placeholders - using your folder paths
+        // Image loading with placeholders
         document.addEventListener('DOMContentLoaded', function() {
-            // Set placeholder for banner (from back folder)
+            // Set placeholder for banner
             const banner = document.getElementById('banner-img');
             banner.onerror = function() {
-                this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="200" viewBox="0 0 1920 200"><rect width="1920" height="200" fill="%23111111"/><text x="960" y="110" font-family="Arial" font-size="24" fill="white" text-anchor="middle">BANNER (back/banner.png)</text></svg>`;
+                this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="200" viewBox="0 0 1920 200"><rect width="1920" height="200" fill="%23111111"/><text x="960" y="110" font-family="Arial" font-size="24" fill="white" text-anchor="middle">BANNER (assets/banner.png)</text></svg>`;
             };
             
-            // Set placeholder for profile (from pfp folder)
+            // Set placeholder for profile
             const profile = document.querySelector('.profile-circle');
             profile.onerror = function() {
-                this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="%23222222"/><text x="60" y="65" font-family="Arial" font-size="16" fill="white" text-anchor="middle">PROFILE (pfp/profile.png)</text></svg>`;
+                this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><circle cx="60" cy="60" r="55" fill="%23222222"/><text x="60" y="65" font-family="Arial" font-size="16" fill="white" text-anchor="middle">PROFILE (assets/profile.png)</text></svg>`;
             };
             
-            // Set placeholder for plane image (from back2 folder)
+            // Set placeholder for plane image
             const planeImg = document.getElementById('planeImage');
             planeImg.onerror = function() {
-                this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23222222"/><text x="200" y="210" font-family="Arial" font-size="24" fill="white" text-anchor="middle">PLANE IMAGE</text><text x="200" y="240" font-family="Arial" font-size="14" fill="white" text-anchor="middle">(back2/background.png)</text></svg>`;
+                this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23222222"/><text x="200" y="210" font-family="Arial" font-size="24" fill="white" text-anchor="middle">PLANE IMAGE</text><text x="200" y="240" font-family="Arial" font-size="14" fill="white" text-anchor="middle">(assets/background.png)</text></svg>`;
             };
             
             // Fallback cursor system
@@ -233,7 +233,7 @@
             
             // Check if custom cursor loaded
             const tempImg = new Image();
-            tempImg.src = 'cursor/cursor.png';
+            tempImg.src = 'assets/pointer.png';
             tempImg.onerror = function() {
                 console.log('Custom cursor not found, using fallback');
                 cursor.style.display = 'block';
@@ -251,19 +251,9 @@
         });
     </script>
     
-    <!-- Optional: Background music from music folder -->
-    <audio id="bgMusic" loop style="display: none;">
-        <source src="music/background.mp3" type="audio/mpeg">
-    </audio>
-    
-    <script>
-        // Optional: Play background music from music folder
-        // Uncomment to enable:
-        // const bgMusic = document.getElementById('bgMusic');
-        // bgMusic.volume = 0.3;
-        // document.addEventListener('click', function() {
-        //     bgMusic.play();
-        // }, { once: true });
-    </script>
+    <!-- Optional: Background music -->
+    <!-- <audio id="bgMusic" loop style="display: none;">
+        <source src="assets/background.mp3" type="audio/mpeg">
+    </audio> -->
 </body>
 </html>
