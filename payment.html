@@ -144,6 +144,103 @@
             margin-right: 8px;
         }
 
+        /* Robux Payment Section */
+        .robux-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,215,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .robux-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, #ff416c, #ffd700, transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .robux-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .robux-icon {
+            font-size: 48px;
+            filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
+        }
+
+        .robux-title {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffd700, #ffae42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .robux-price {
+            font-size: 42px;
+            font-weight: 800;
+            color: #ffd700;
+            margin: 10px 0;
+            text-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        .robux-price small {
+            font-size: 18px;
+            color: #888;
+            font-weight: normal;
+        }
+
+        .robux-tagline {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .robux-tagline span {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .robux-button {
+            background: linear-gradient(135deg, #ffd700, #ffae42);
+            border: none;
+            border-radius: 12px;
+            padding: 15px 25px;
+            width: 100%;
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,215,0,0.3);
+            text-decoration: none;
+        }
+
+        .robux-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.3);
+        }
+
         /* Crypto Selector */
         .crypto-selector {
             background: rgba(0,0,0,0.3);
@@ -162,7 +259,7 @@
 
         .coin-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-bottom: 25px;
         }
@@ -472,9 +569,6 @@
             .checkout-container {
                 grid-template-columns: 1fr;
             }
-            .coin-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
         }
 
         @media (max-width: 768px) {
@@ -487,11 +581,8 @@
             .payment-options, .order-summary {
                 padding: 25px;
             }
-        }
-
-        @media (max-width: 480px) {
-            .coin-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .robux-price {
+                font-size: 32px;
             }
         }
     </style>
@@ -522,7 +613,28 @@
             <!-- Left Column - Payment Options -->
             <div class="payment-options">
                 <div class="section-title">
-                    <i>◆</i> CARD / WALLET
+                    <i>◆</i> PAYMENT METHODS
+                </div>
+
+                <!-- Robux Payment Section - Direct Game Pass Link -->
+                <div class="robux-section">
+                    <div class="robux-header">
+                        <span class="robux-icon">💰</span>
+                        <span class="robux-title">ROBUX PAYMENT</span>
+                    </div>
+                    <div class="robux-price">
+                        8,000 <small>ROBUX</small>
+                    </div>
+                    <div class="robux-tagline">
+                        <span>⚡ THE CHEAPEST ROBLOX LAGGER OUT THERE ⚡</span>
+                    </div>
+                    <a href="https://www.roblox.com/game-pass/1722292430/space" target="_blank" style="text-decoration: none;">
+                        <button class="robux-button">
+                            <span>🪙</span>
+                            Buy with Robux
+                            <span style="font-size: 14px;">→</span>
+                        </button>
+                    </a>
                 </div>
 
                 <!-- Crypto Selector -->
@@ -545,23 +657,13 @@
                             <span class="coin-icon">◎</span>
                             <span class="coin-name">SOL</span>
                         </div>
-                        <!-- Dogecoin -->
-                        <div class="coin-option" onclick="selectCrypto('doge')" id="coin-doge">
-                            <span class="coin-icon">Ð</span>
-                            <span class="coin-name">DOGE</span>
-                        </div>
-                        <!-- Litecoin -->
-                        <div class="coin-option" onclick="selectCrypto('ltc')" id="coin-ltc">
-                            <span class="coin-icon">Ł</span>
-                            <span class="coin-name">LTC</span>
-                        </div>
                     </div>
 
                     <!-- Payment Address (Dynamic) -->
                     <div class="payment-address">
                         <div class="address-label">Pay with <span id="selected-coin-name">BTC</span></div>
                         <div class="address-box" onclick="copyAddress()">
-                            <span class="address-text" id="crypto-address">3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</span>
+                            <span class="address-text" id="crypto-address">bc1qelz8gz34jnwl6nmz7zzxpnl8qrgynzspnycays</span>
                             <button class="copy-btn" onclick="copyAddress(); event.stopPropagation();">
                                 <span>📋</span> Copy
                             </button>
@@ -592,7 +694,7 @@
                 <div class="summary-header">
                     <h2>Monthly Access</h2>
                     <div class="trust-badge">
-                        <span>✓</span> Secure, fast checkout with Link
+                        <span>✓</span> Secure, fast checkout
                     </div>
                 </div>
 
@@ -628,29 +730,19 @@
         // Crypto addresses and network info
         const cryptoData = {
             btc: {
-                address: '3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5',
+                address: 'bc1qelz8gz34jnwl6nmz7zzxpnl8qrgynzspnycays',
                 network: 'Bitcoin Mainnet',
                 name: 'BTC'
             },
             eth: {
-                address: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
+                address: '0xc80d234C3926835AEB7f939b41fac4ed3c5b49da',
                 network: 'ERC-20',
                 name: 'ETH'
             },
             sol: {
-                address: '7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZHGQNQ4TZn',
+                address: 'C6SHc21NHfLQ5q5hTpTcB2GmEftQ8N3AZhrqAUXXVWV1',
                 network: 'Solana Mainnet',
                 name: 'SOL'
-            },
-            doge: {
-                address: 'D5pQ3zJf9Gq7xKv2nR8tLm4cB6wH1yE8sU3a',
-                network: 'Dogecoin Mainnet',
-                name: 'DOGE'
-            },
-            ltc: {
-                address: 'ltc1q7s9q7s9q7s9q7s9q7s9q7s9q7s9q7s9q7s9q7',
-                network: 'Litecoin Mainnet',
-                name: 'LTC'
             }
         };
 
