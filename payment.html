@@ -17,30 +17,51 @@
             color: #fff;
             line-height: 1.6;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
-            flex: 1;
+            padding: 0 20px;
+        }
+
+        /* Header with background image */
+        .header-bg {
+            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            border-radius: 0 0 24px 24px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(26,26,46,0.9) 100%);
+            backdrop-filter: blur(5px);
         }
 
         .navbar {
-            padding: 20px 0;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 2;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 40px;
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            background: linear-gradient(135deg, #fff, #ff416c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -66,106 +87,148 @@
             color: #ff416c;
         }
 
-        .back-link {
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, #ff416c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-stats {
             color: #888;
-            text-decoration: none;
-            transition: color 0.3s;
+            font-size: 16px;
         }
 
-        .back-link:hover {
+        .header-stats span {
             color: #ff416c;
+            font-weight: bold;
         }
 
+        /* Glowing effect for boxes */
+        @keyframes moveGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .glow-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .glow-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b, #ff416c, #ff4b2b);
+            border-radius: 26px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+
+        .glow-wrapper:hover::before {
+            opacity: 1;
+            animation: moveGlow 3s linear infinite;
+        }
+
+        .glow-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0a0a0f;
+            border-radius: 24px;
+            z-index: -1;
+        }
+
+        /* Payment Grid */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Payment boxes */
         .payment-box {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
+            border-radius: 24px;
+            padding: 30px;
         }
 
-        .payment-box h1 {
-            font-size: 32px;
+        .payment-box h2 {
+            font-size: 24px;
             margin-bottom: 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #fff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #fff;
         }
 
-        .price-tag {
-            text-align: center;
-            font-size: 48px;
-            font-weight: bold;
-            color: #ff416c;
+        /* Crypto tab */
+        .crypto-tab {
             margin-bottom: 30px;
-        }
-
-        .price-tag small {
-            font-size: 18px;
-            color: #888;
-            font-weight: normal;
-        }
-
-        .instruction {
-            text-align: center;
-            color: #888;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .crypto-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .crypto-item {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,65,108,0.3);
-            border-radius: 12px;
-            padding: 20px;
         }
 
         .crypto-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .crypto-icon {
-            font-size: 24px;
+            font-size: 32px;
+            background: rgba(255,65,108,0.1);
+            padding: 12px;
+            border-radius: 16px;
         }
 
-        .crypto-name {
-            font-weight: bold;
-            color: #ff416c;
+        .crypto-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
         }
 
-        .address-container {
-            display: flex;
-            background: rgba(0,0,0,0.5);
-            border-radius: 8px;
-            padding: 12px 15px;
-            border: 1px solid rgba(255,255,255,0.1);
-            word-break: break-all;
-            font-family: monospace;
+        .crypto-info p {
+            color: #888;
             font-size: 14px;
-            cursor: pointer;
-            transition: border-color 0.3s;
         }
 
-        .address-container:hover {
+        .address-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,65,108,0.3);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .address-box:hover {
             border-color: #ff416c;
+            background: rgba(255,65,108,0.05);
         }
 
         .address-text {
-            flex: 1;
+            font-family: monospace;
+            font-size: 14px;
             color: #fff;
+            word-break: break-all;
         }
 
         .copy-btn {
@@ -173,88 +236,170 @@
             border: none;
             color: #888;
             cursor: pointer;
-            font-size: 14px;
-            margin-left: 10px;
-            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
         }
 
         .copy-btn:hover {
             color: #ff416c;
+            background: rgba(255,65,108,0.1);
         }
 
-        .network-note {
-            margin-top: 10px;
-            font-size: 13px;
+        /* PayPal section */
+        .paypal-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .paypal-button {
+            background: #0070ba;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .paypal-button:hover {
+            background: #005ea6;
+            transform: translateY(-2px);
+        }
+
+        /* Order summary */
+        .order-summary {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 30px;
+            height: fit-content;
+        }
+
+        .price-large {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff416c;
+            margin: 20px 0;
+        }
+
+        .price-large small {
+            font-size: 18px;
             color: #888;
         }
 
-        .network-note span {
+        .promo-code {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 20px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .promo-code:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            color: #888;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li::before {
+            content: "✓";
             color: #ff416c;
             font-weight: bold;
         }
 
-        .status-box {
-            background: rgba(255,65,108,0.1);
-            border: 1px solid #ff416c;
-            border-radius: 12px;
+        /* Card payment section */
+        .card-payment {
+            margin-top: 30px;
             padding: 20px;
-            margin-top: 20px;
-            text-align: center;
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
         }
 
-        .status-box h3 {
-            color: #ff416c;
-            margin-bottom: 10px;
-        }
-
-        .status-box p {
-            color: #888;
-            font-size: 14px;
-        }
-
-        .email-input {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .email-input input {
-            flex: 1;
+        .card-input {
+            width: 100%;
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 5px;
+            border-radius: 8px;
             padding: 12px;
             color: #fff;
-            font-size: 14px;
+            margin-bottom: 15px;
         }
 
-        .email-input input:focus {
+        .card-input:focus {
             outline: none;
             border-color: #ff416c;
         }
 
-        .email-input button {
+        .card-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        select.card-input {
+            cursor: pointer;
+        }
+
+        select.card-input option {
+            background: #0a0a0f;
+            color: #fff;
+        }
+
+        .pay-now {
             background: linear-gradient(135deg, #ff416c, #ff4b2b);
             border: none;
-            border-radius: 5px;
-            padding: 12px 25px;
-            color: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            width: 100%;
+            color: white;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.3s;
+            margin: 20px 0;
+            transition: all 0.3s;
         }
 
-        .email-input button:hover {
+        .pay-now:hover {
             transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,65,108,0.3);
         }
 
-        .footer {
-            text-align: center;
-            padding: 40px 0;
+        .secure-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             color: #888;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            margin-top: 20px;
         }
 
+        /* Alert */
         .alert {
             position: fixed;
             top: 20px;
@@ -274,12 +419,12 @@
             opacity: 1;
         }
 
-        @media (max-width: 600px) {
-            .payment-box {
-                padding: 20px;
+        @media (max-width: 768px) {
+            .payment-grid {
+                grid-template-columns: 1fr;
             }
-            .email-input {
-                flex-direction: column;
+            .header-content h1 {
+                font-size: 32px;
             }
             .nav-links {
                 display: none;
@@ -289,107 +434,151 @@
 </head>
 <body>
     <div class="container">
-        <nav class="navbar">
-            <a href="/" class="logo">kimbongun.space</a>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/api">API</a>
-                <a href="/payment" style="color: #ff416c;">Payment</a>
-                <a href="/login">Login</a>
-                <a href="/" class="back-link">← Back</a>
+        <!-- Header with background -->
+        <div class="header-bg">
+            <nav class="navbar">
+                <a href="/" class="logo">kimbongun.space</a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/api">API</a>
+                    <a href="/payment" style="color: #ff416c;">Payment</a>
+                    <a href="/login">Login</a>
+                </div>
+            </nav>
+            <div class="header-content">
+                <h1>SECURE CHECKOUT</h1>
+                <div class="header-stats">
+                    <span>Trusted by 697+</span> active users worldwide
+                </div>
             </div>
-        </nav>
+        </div>
 
-        <div class="payment-box">
-            <h1>Complete Your Purchase</h1>
-            <div class="price-tag">
-                $49.99 <small>USD</small>
-            </div>
-            
-            <div class="instruction">
-                <p>Send exactly <strong>$49.99 USD worth of crypto</strong> to any address below.</p>
-                <p style="font-size: 13px; margin-top: 5px;">Funds are automatically verified on the blockchain.</p>
-            </div>
-
-            <div class="crypto-list">
+        <!-- Payment grid -->
+        <div class="payment-grid">
+            <!-- Left column - Crypto & PayPal with glow -->
+            <div class="payment-box glow-wrapper">
+                <h2>Pay with Crypto</h2>
+                
                 <!-- Bitcoin -->
-                <div class="crypto-item">
+                <div class="crypto-tab">
                     <div class="crypto-header">
                         <span class="crypto-icon">₿</span>
-                        <span class="crypto-name">Bitcoin (BTC)</span>
+                        <div class="crypto-info">
+                            <h3>Bitcoin (BTC)</h3>
+                            <p>Network: Bitcoin Mainnet</p>
+                        </div>
                     </div>
-                    <div class="address-container" onclick="copyAddress('btc')">
+                    <div class="address-box" onclick="copyAddress('btc')">
                         <span class="address-text" id="btc-address">3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5</span>
-                        <button class="copy-btn" onclick="copyAddress('btc'); event.stopPropagation();">📋 Copy</button>
-                    </div>
-                    <div class="network-note">
-                        <span>Network:</span> Bitcoin Mainnet
+                        <button class="copy-btn" onclick="copyAddress('btc'); event.stopPropagation();">Copy</button>
                     </div>
                 </div>
 
                 <!-- Ethereum -->
-                <div class="crypto-item">
+                <div class="crypto-tab">
                     <div class="crypto-header">
                         <span class="crypto-icon">♦️</span>
-                        <span class="crypto-name">Ethereum (ETH)</span>
+                        <div class="crypto-info">
+                            <h3>Ethereum (ETH)</h3>
+                            <p>Network: ERC-20</p>
+                        </div>
                     </div>
-                    <div class="address-container" onclick="copyAddress('eth')">
+                    <div class="address-box" onclick="copyAddress('eth')">
                         <span class="address-text" id="eth-address">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</span>
-                        <button class="copy-btn" onclick="copyAddress('eth'); event.stopPropagation();">📋 Copy</button>
-                    </div>
-                    <div class="network-note">
-                        <span>Network:</span> ERC-20
-                    </div>
-                </div>
-
-                <!-- Litecoin -->
-                <div class="crypto-item">
-                    <div class="crypto-header">
-                        <span class="crypto-icon">Ł</span>
-                        <span class="crypto-name">Litecoin (LTC)</span>
-                    </div>
-                    <div class="address-container" onclick="copyAddress('ltc')">
-                        <span class="address-text" id="ltc-address">ltc1q7s9q7s9q7s9q7s9q7s9q7s9q7s9q7s9q7s9q7</span>
-                        <button class="copy-btn" onclick="copyAddress('ltc'); event.stopPropagation();">📋 Copy</button>
-                    </div>
-                    <div class="network-note">
-                        <span>Network:</span> Litecoin Mainnet
+                        <button class="copy-btn" onclick="copyAddress('eth'); event.stopPropagation();">Copy</button>
                     </div>
                 </div>
 
                 <!-- Solana -->
-                <div class="crypto-item">
+                <div class="crypto-tab">
                     <div class="crypto-header">
                         <span class="crypto-icon">◎</span>
-                        <span class="crypto-name">Solana (SOL)</span>
+                        <div class="crypto-info">
+                            <h3>Solana (SOL)</h3>
+                            <p>Network: Solana Mainnet</p>
+                        </div>
                     </div>
-                    <div class="address-container" onclick="copyAddress('sol')">
+                    <div class="address-box" onclick="copyAddress('sol')">
                         <span class="address-text" id="sol-address">7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZHGQNQ4TZn</span>
-                        <button class="copy-btn" onclick="copyAddress('sol'); event.stopPropagation();">📋 Copy</button>
+                        <button class="copy-btn" onclick="copyAddress('sol'); event.stopPropagation();">Copy</button>
                     </div>
-                    <div class="network-note">
-                        <span>Network:</span> Solana Mainnet
+                </div>
+
+                <!-- Litecoin -->
+                <div class="crypto-tab">
+                    <div class="crypto-header">
+                        <span class="crypto-icon">Ł</span>
+                        <div class="crypto-info">
+                            <h3>Litecoin (LTC)</h3>
+                            <p>Network: Litecoin Mainnet</p>
+                        </div>
                     </div>
+                    <div class="address-box" onclick="copyAddress('ltc')">
+                        <span class="address-text" id="ltc-address">ltc1q7s9q7s9q7s9q7s9q7s9q7s9q7s9q7s9q7s9q7</span>
+                        <button class="copy-btn" onclick="copyAddress('ltc'); event.stopPropagation();">Copy</button>
+                    </div>
+                </div>
+
+                <!-- PayPal Section -->
+                <div class="paypal-section">
+                    <h2>OR PAY WITH</h2>
+                    <button class="paypal-button" onclick="alert('PayPal integration coming soon')">
+                        <span>PayPal</span>
+                        <span style="font-size: 20px;">📱</span>
+                    </button>
                 </div>
             </div>
 
-            <div class="status-box">
-                <h3>⚡ After Sending Payment</h3>
-                <p>Enter your email below to receive your access key instantly once the transaction is confirmed.</p>
+            <!-- Right column - Order Summary & Card with glow -->
+            <div class="order-summary glow-wrapper">
+                <h2>Monthly Access</h2>
                 
-                <div class="email-input">
-                    <input type="email" id="email" placeholder="your@email.com">
-                    <button onclick="notifyPayment()">Notify Me</button>
+                <div class="price-large">
+                    €49.99 <small>/mo</small>
                 </div>
-                <p style="font-size: 12px; margin-top: 15px; color: #666;">We'll send your access key within 5 minutes of confirmation.</p>
+
+                <div class="promo-code">
+                    <span>💳 Have a promo code?</span>
+                    <span style="color: #ff416c;">▼</span>
+                </div>
+
+                <ul class="features-list">
+                    <li>Unlimited API requests</li>
+                    <li>Priority support</li>
+                    <li>Instant access</li>
+                    <li>24/7 uptime</li>
+                </ul>
+
+                <!-- Card Payment -->
+                <div class="card-payment">
+                    <h3 style="margin-bottom: 15px;">Pay with Card</h3>
+                    
+                    <input type="text" class="card-input" placeholder="Card number" value="1234 1234 1234 1234">
+                    
+                    <div class="card-row">
+                        <input type="text" class="card-input" placeholder="MM / YY" value="12/25">
+                        <input type="text" class="card-input" placeholder="CVC" value="123">
+                    </div>
+
+                    <select class="card-input">
+                        <option>Finland</option>
+                        <option>USA</option>
+                        <option>UK</option>
+                        <option>Germany</option>
+                    </select>
+
+                    <button class="pay-now">Pay Now</button>
+
+                    <div class="secure-footer">
+                        <span>🔒</span>
+                        <span>Encrypted & secured by Stripe</span>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <footer class="footer">
-            © 2024 kimbongun.space - Secure payments powered by blockchain
-        </footer>
     </div>
 
+    <!-- Copy Alert -->
     <div class="alert" id="copyAlert">Address copied to clipboard!</div>
 
     <script>
@@ -398,8 +587,8 @@
             switch(crypto) {
                 case 'btc': address = document.getElementById('btc-address').innerText; break;
                 case 'eth': address = document.getElementById('eth-address').innerText; break;
-                case 'ltc': address = document.getElementById('ltc-address').innerText; break;
                 case 'sol': address = document.getElementById('sol-address').innerText; break;
+                case 'ltc': address = document.getElementById('ltc-address').innerText; break;
             }
             
             navigator.clipboard.writeText(address).then(() => {
@@ -407,15 +596,6 @@
                 alert.classList.add('show');
                 setTimeout(() => alert.classList.remove('show'), 2000);
             });
-        }
-
-        function notifyPayment() {
-            const email = document.getElementById('email').value;
-            if (!email) {
-                alert('Please enter your email address');
-                return;
-            }
-            alert(`✅ We'll notify ${email} once payment is confirmed.`);
         }
     </script>
 </body>
