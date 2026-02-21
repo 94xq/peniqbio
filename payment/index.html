@@ -47,6 +47,25 @@
             text-decoration: none;
         }
 
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: #ff416c;
+        }
+
         .back-link {
             color: #888;
             text-decoration: none;
@@ -259,9 +278,11 @@
             .payment-box {
                 padding: 20px;
             }
-            
             .email-input {
                 flex-direction: column;
+            }
+            .nav-links {
+                display: none;
             }
         }
     </style>
@@ -269,8 +290,14 @@
 <body>
     <div class="container">
         <nav class="navbar">
-            <a href="index.html" class="logo">kimbongun.space</a>
-            <a href="index.html" class="back-link">← Back to Home</a>
+            <a href="/" class="logo">kimbongun.space</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/api">API</a>
+                <a href="/payment" style="color: #ff416c;">Payment</a>
+                <a href="/login">Login</a>
+                <a href="/" class="back-link">← Back</a>
+            </div>
         </nav>
 
         <div class="payment-box">
@@ -348,10 +375,10 @@
 
             <div class="status-box">
                 <h3>⚡ After Sending Payment</h3>
-                <p>Enter your email below to receive your access key instantly once the transaction is confirmed on the blockchain.</p>
+                <p>Enter your email below to receive your access key instantly once the transaction is confirmed.</p>
                 
                 <div class="email-input">
-                    <input type="email" id="email" placeholder="your@email.com" value="">
+                    <input type="email" id="email" placeholder="your@email.com">
                     <button onclick="notifyPayment()">Notify Me</button>
                 </div>
                 <p style="font-size: 12px; margin-top: 15px; color: #666;">We'll send your access key within 5 minutes of confirmation.</p>
@@ -369,26 +396,16 @@
         function copyAddress(crypto) {
             let address = '';
             switch(crypto) {
-                case 'btc':
-                    address = document.getElementById('btc-address').innerText;
-                    break;
-                case 'eth':
-                    address = document.getElementById('eth-address').innerText;
-                    break;
-                case 'ltc':
-                    address = document.getElementById('ltc-address').innerText;
-                    break;
-                case 'sol':
-                    address = document.getElementById('sol-address').innerText;
-                    break;
+                case 'btc': address = document.getElementById('btc-address').innerText; break;
+                case 'eth': address = document.getElementById('eth-address').innerText; break;
+                case 'ltc': address = document.getElementById('ltc-address').innerText; break;
+                case 'sol': address = document.getElementById('sol-address').innerText; break;
             }
             
             navigator.clipboard.writeText(address).then(() => {
                 const alert = document.getElementById('copyAlert');
                 alert.classList.add('show');
-                setTimeout(() => {
-                    alert.classList.remove('show');
-                }, 2000);
+                setTimeout(() => alert.classList.remove('show'), 2000);
             });
         }
 
@@ -398,12 +415,7 @@
                 alert('Please enter your email address');
                 return;
             }
-            
-            alert(`✅ We'll notify ${email} once payment is confirmed.\n\nIn a real implementation, this would connect to a backend to monitor blockchain transactions.`);
-        }
-
-        window.onload = function() {
-            console.log('Payment page loaded for kimbongun.space');
+            alert(`✅ We'll notify ${email} once payment is confirmed.`);
         }
     </script>
 </body>
