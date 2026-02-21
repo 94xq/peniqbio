@@ -16,6 +16,7 @@
             background-color: #0a0a0f;
             color: #fff;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -24,43 +25,19 @@
             padding: 0 20px;
         }
 
-        /* Header with background image */
-        .header-bg {
-            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            border-radius: 0 0 24px 24px;
-            margin-bottom: 40px;
-            overflow: hidden;
-        }
-
-        .header-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(26,26,46,0.9) 100%);
-            backdrop-filter: blur(5px);
-        }
-
+        /* Navbar */
         .navbar {
-            padding: 20px 30px;
+            padding: 20px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 2;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
-            background: linear-gradient(135deg, #fff, #ff416c);
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -110,86 +87,17 @@
             cursor: pointer;
             transition: transform 0.3s;
             text-decoration: none;
-            display: inline-block;
         }
 
         .get-access-btn:hover {
             transform: translateY(-2px);
         }
 
-        .header-content {
-            position: relative;
-            z-index: 2;
-            padding: 40px 30px;
-            text-align: center;
-        }
-
-        .header-content h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #fff, #ff416c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header-stats {
-            color: #888;
-            font-size: 16px;
-        }
-
-        .header-stats span {
-            color: #ff416c;
-            font-weight: bold;
-        }
-
-        /* Glowing effect for boxes */
-        @keyframes moveGlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .glow-wrapper {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .glow-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff416c, #ff4b2b, #ff416c, #ff4b2b);
-            border-radius: 12px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
-        }
-
-        .glow-wrapper:hover::before {
-            opacity: 1;
-            animation: moveGlow 3s linear infinite;
-        }
-
-        .glow-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #0a0a0f;
-            border-radius: 10px;
-            z-index: -1;
-        }
-
         /* Stats Bar */
         .stats-bar {
             background: rgba(255,255,255,0.05);
             padding: 15px 0;
-            margin: 20px 0;
+            margin: 30px 0;
             border-radius: 10px;
             text-align: center;
             font-size: 18px;
@@ -204,22 +112,26 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 40px 0;
+            padding: 60px 0 40px;
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 64px;
             margin-bottom: 20px;
             background: linear-gradient(135deg, #fff, #888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 800;
         }
 
         .hero p {
-            font-size: 18px;
+            font-size: 20px;
             color: #888;
             margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-cta {
@@ -244,7 +156,7 @@
             border-bottom: 1px dashed #888;
         }
 
-        /* Features Grid */
+        /* Features Grid - First Row */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -253,16 +165,17 @@
         }
 
         .feature-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.03);
             padding: 30px;
             border-radius: 10px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.05);
             transition: transform 0.3s;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
+            border-color: #ff416c;
         }
 
         .feature-card .number {
@@ -283,13 +196,82 @@
             font-size: 14px;
         }
 
-        /* Why Choose Us */
+        /* Why Choose Us Section */
         .why-choose {
             margin: 80px 0;
-            text-align: center;
         }
 
         .why-choose h2 {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .why-choose .subhead {
+            text-align: center;
+            color: #888;
+            font-size: 18px;
+            margin-bottom: 60px;
+        }
+
+        /* Benefits Grid - 3x2 Layout */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            border-color: #ff416c;
+            transform: translateY(-5px);
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #ff416c;
+        }
+
+        .benefit-card p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Limited Availability Banner */
+        .limited-banner {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 14px;
+            color: #ff416c;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin: 80px 0;
+            padding: 60px;
+            background: linear-gradient(135deg, rgba(255,65,108,0.1), rgba(255,75,43,0.1));
+            border-radius: 30px;
+            border: 1px solid rgba(255,65,108,0.3);
+        }
+
+        .cta-section h2 {
             font-size: 48px;
             margin-bottom: 20px;
             background: linear-gradient(135deg, #fff, #888);
@@ -298,41 +280,161 @@
             background-clip: text;
         }
 
-        .why-choose > p {
+        .cta-price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff416c;
+            margin: 20px 0;
+        }
+
+        .cta-price small {
+            font-size: 16px;
             color: #888;
+            font-weight: normal;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .primary-cta {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
             font-size: 18px;
-            margin-bottom: 40px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .features-desc {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+        .primary-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,65,108,0.3);
+        }
+
+        .discord-cta {
+            background: transparent;
+            border: 1px solid #ff416c;
+            padding: 15px 40px;
+            border-radius: 8px;
+            color: #ff416c;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .discord-cta:hover {
+            background: #ff416c;
+            color: #fff;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
             gap: 30px;
-            margin-top: 40px;
         }
 
-        .feature-desc-item p {
+        .footer-links a {
             color: #888;
+            text-decoration: none;
             font-size: 14px;
-            line-height: 1.6;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff416c;
+        }
+
+        .footer-copyright {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .features-grid, .features-desc {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .header-content h1 {
-                font-size: 32px;
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
             }
+            
             .nav-links {
                 display: none;
+            }
+            
+            .cta-section {
+                padding: 40px 20px;
+            }
+            
+            .cta-section h2 {
+                font-size: 32px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
         @media (max-width: 480px) {
-            .features-grid, .features-desc {
+            .features-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
             .hero-cta {
                 flex-direction: column;
             }
@@ -341,25 +443,17 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header with background -->
-        <div class="header-bg">
-            <nav class="navbar">
-                <div class="logo">kimbongun.space</div>
-                <div class="nav-links">
-                    <a href="/">Home</a>
-                    <a href="/api">API</a>
-                    <a href="/payment">Payment</a>
-                    <a href="/login">Login</a>
-                    <a href="/payment" class="get-access-btn">Get Access</a>
-                </div>
-            </nav>
-            <div class="header-content">
-                <h1>Most Powerful Roblox DDoS</h1>
-                <div class="header-stats">
-                    <span>697+ active users</span> worldwide
-                </div>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo">kimbongun.space</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/api">API</a>
+                <a href="/payment">Payment</a>
+                <a href="/login">Login</a>
+                <a href="/payment" class="get-access-btn">Get Access</a>
             </div>
-        </div>
+        </nav>
 
         <!-- Stats Bar -->
         <div class="stats-bar">
@@ -369,48 +463,109 @@
         <!-- Hero Section -->
         <section class="hero">
             <h1>Most Powerful<br>Roblox DDoS</h1>
-            <p>Advanced, undetectable, and blazingly fast. Professional-grade tooling<br>trusted by users worldwide.</p>
+            <p>Advanced, undetectable, and blazingly fast. Professional-grade tooling trusted by users worldwide.</p>
             <div class="hero-cta">
-                <span class="price-tag">$49.99/mo →</span>
+                <span class="price-tag">Get Access — $49.99/mo →</span>
                 <a href="/api" class="api-docs">API Docs</a>
             </div>
         </section>
 
-        <!-- Features Grid with glow effect -->
+        <!-- Features Grid - 4 Stats -->
         <div class="features-grid">
-            <div class="feature-card glow-wrapper">
+            <div class="feature-card">
                 <div class="number">100%</div>
                 <div class="label">Undetectable</div>
                 <div class="desc">Advanced encryption keeps your identity hidden</div>
             </div>
-            <div class="feature-card glow-wrapper">
+            <div class="feature-card">
                 <div class="number">99%</div>
                 <div class="label">Success Rate</div>
                 <div class="desc">Premium infrastructure for instant results</div>
             </div>
-            <div class="feature-card glow-wrapper">
+            <div class="feature-card">
                 <div class="number">24/7</div>
                 <div class="label">Always Online</div>
                 <div class="desc">Infrastructure never sleeps</div>
             </div>
-            <div class="feature-card glow-wrapper">
+            <div class="feature-card">
                 <div class="number">&lt;1s</div>
                 <div class="label">Response Time</div>
                 <div class="desc">Sub-second response times</div>
             </div>
         </div>
 
-        <!-- Why Choose Us -->
+        <!-- Quick Benefits (Instant Delivery, Secure Payment, No Logs, 24/7 Support) -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 40px 0; text-align: center;">
+            <div style="color: #888; font-size: 14px;">⚡ Instant Delivery</div>
+            <div style="color: #888; font-size: 14px;">🔒 Secure Payment</div>
+            <div style="color: #888; font-size: 14px;">📜 No Logs Policy</div>
+            <div style="color: #888; font-size: 14px;">💬 24/7 Support</div>
+        </div>
+
+        <!-- Why Choose Us Section -->
         <section class="why-choose">
             <h2>WHY CHOOSE US</h2>
-            <p>Built different. The most reliable and powerful platform available.<br>Every detail engineered for performance.</p>
-            <div class="features-desc">
-                <div class="feature-desc-item"><p>Advanced encryption keeps your identity hidden</p></div>
-                <div class="feature-desc-item"><p>Premium infrastructure for instant results</p></div>
-                <div class="feature-desc-item"><p>Infrastructure never sleeps</p></div>
-                <div class="feature-desc-item"><p>Sub-second response times</p></div>
+            <p class="subhead">Built different. The most reliable and powerful platform available. Every detail engineered for performance.</p>
+
+            <!-- Benefits Grid - 6 Features (as seen in second image) -->
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>100% Undetectable</h3>
+                    <p>Advanced encryption keeps your identity completely hidden. No logs, no traces, total anonymity.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Lightning Fast</h3>
+                    <p>Sub-second response times powered by premium global infrastructure for instant results.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>24/7 Uptime</h3>
+                    <p>Always online, always available. Our infrastructure never sleeps so you never miss a window.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Secure Payments</h3>
+                    <p>Apple Pay, Google Pay, credit cards, and crypto accepted. Encrypted and processed safely.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Easy to Use</h3>
+                    <p>Instant activation after purchase. No technical knowledge required — works right out of the box.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Premium Support</h3>
+                    <p>Active Discord community with fast responses. We're here whenever you need help.</p>
+                </div>
             </div>
         </section>
+
+        <!-- Limited Availability Banner -->
+        <div class="limited-banner">
+            ⚡ LIMITED AVAILABILITY ⚡
+        </div>
+
+        <!-- CTA Section (as seen in second image) -->
+        <section class="cta-section">
+            <h2>Ready to get started?</h2>
+            <p style="color: #888; font-size: 18px; margin-bottom: 20px;">Get full access for just <strong style="color: #ff416c;">$49.99/month</strong>. Card, crypto, Apple Pay & Google Pay accepted.</p>
+            
+            <div class="cta-buttons">
+                <a href="/payment" class="primary-cta">Get Access Now →</a>
+                <a href="#" class="discord-cta">Join Discord</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">kimbongun.space</div>
+                <div class="footer-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Refund</a>
+                    <a href="/api">API</a>
+                </div>
+                <div class="footer-copyright">
+                    © 2023–2026 kimbongun.space
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
