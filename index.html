@@ -24,7 +24,6 @@
             padding: 0 20px;
         }
 
-        /* Navbar */
         .navbar {
             padding: 20px 0;
             display: flex;
@@ -91,7 +90,6 @@
             transform: translateY(-2px);
         }
 
-        /* Stats Bar */
         .stats-bar {
             background: rgba(255,255,255,0.05);
             padding: 15px 0;
@@ -107,7 +105,6 @@
             font-weight: bold;
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
             padding: 60px 0;
@@ -150,7 +147,6 @@
             border-bottom: 1px dashed #888;
         }
 
-        /* Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -190,7 +186,6 @@
             font-size: 14px;
         }
 
-        /* Why Choose Us */
         .why-choose {
             margin: 80px 0;
             text-align: center;
@@ -218,10 +213,6 @@
             margin-top: 40px;
         }
 
-        .feature-desc-item {
-            text-align: center;
-        }
-
         .feature-desc-item p {
             color: #888;
             font-size: 14px;
@@ -232,7 +223,6 @@
             .features-grid, .features-desc {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
             .hero h1 {
                 font-size: 36px;
             }
@@ -242,11 +232,9 @@
             .features-grid, .features-desc {
                 grid-template-columns: 1fr;
             }
-            
             .nav-links {
                 display: none;
             }
-            
             .hero-cta {
                 flex-direction: column;
             }
@@ -255,34 +243,30 @@
 </head>
 <body>
     <div class="container">
-        <!-- Navbar -->
         <nav class="navbar">
             <div class="logo">kimbongun.space</div>
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="api.html">API</a>
-                <a href="payment.html">Payment</a>
-                <button class="login-btn" onclick="window.location.href='login.html'">Login</button>
-                <a href="payment.html" class="get-access-btn">Get Access</a>
+                <a href="/">Home</a>
+                <a href="/api">API</a>
+                <a href="/payment">Payment</a>
+                <button class="login-btn" onclick="window.location.href='/login'">Login</button>
+                <a href="/payment" class="get-access-btn">Get Access</a>
             </div>
         </nav>
 
-        <!-- Stats Bar -->
         <div class="stats-bar">
             <span>697 clients</span> active right now
         </div>
 
-        <!-- Hero Section -->
         <section class="hero">
             <h1>Most Powerful<br>Roblox DDoS</h1>
             <p>Advanced, undetectable, and blazingly fast. Professional-grade tooling<br>trusted by users worldwide.</p>
             <div class="hero-cta">
                 <span class="price-tag">$49.99/mo →</span>
-                <a href="#" class="api-docs">API Docs</a>
+                <a href="/api" class="api-docs">API Docs</a>
             </div>
         </section>
 
-        <!-- Features Grid -->
         <div class="features-grid">
             <div class="feature-card">
                 <div class="number">100%</div>
@@ -306,24 +290,14 @@
             </div>
         </div>
 
-        <!-- Why Choose Us -->
         <section class="why-choose">
             <h2>WHY CHOOSE US</h2>
             <p>Built different. The most reliable and powerful platform available.<br>Every detail engineered for performance.</p>
-
             <div class="features-desc">
-                <div class="feature-desc-item">
-                    <p>Advanced encryption keeps your identity hidden</p>
-                </div>
-                <div class="feature-desc-item">
-                    <p>Premium infrastructure for instant results</p>
-                </div>
-                <div class="feature-desc-item">
-                    <p>Infrastructure never sleeps</p>
-                </div>
-                <div class="feature-desc-item">
-                    <p>Sub-second response times</p>
-                </div>
+                <div class="feature-desc-item"><p>Advanced encryption keeps your identity hidden</p></div>
+                <div class="feature-desc-item"><p>Premium infrastructure for instant results</p></div>
+                <div class="feature-desc-item"><p>Infrastructure never sleeps</p></div>
+                <div class="feature-desc-item"><p>Sub-second response times</p></div>
             </div>
         </section>
     </div>
