@@ -24,21 +24,47 @@
             padding: 0 20px;
         }
 
+        /* Header with background image */
+        .header-bg {
+            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            border-radius: 0 0 24px 24px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(26,26,46,0.9) 100%);
+            backdrop-filter: blur(5px);
+        }
+
         .navbar {
-            padding: 20px 0;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 2;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            background: linear-gradient(135deg, #fff, #ff416c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-decoration: none;
         }
 
         .nav-links {
@@ -57,6 +83,7 @@
 
         .nav-links a:hover {
             opacity: 1;
+            color: #ff416c;
         }
 
         .login-btn {
@@ -90,6 +117,75 @@
             transform: translateY(-2px);
         }
 
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff, #ff416c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-stats {
+            color: #888;
+            font-size: 16px;
+        }
+
+        .header-stats span {
+            color: #ff416c;
+            font-weight: bold;
+        }
+
+        /* Glowing effect for boxes */
+        @keyframes moveGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .glow-wrapper {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .glow-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b, #ff416c, #ff4b2b);
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+
+        .glow-wrapper:hover::before {
+            opacity: 1;
+            animation: moveGlow 3s linear infinite;
+        }
+
+        .glow-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0a0a0f;
+            border-radius: 10px;
+            z-index: -1;
+        }
+
+        /* Stats Bar */
         .stats-bar {
             background: rgba(255,255,255,0.05);
             padding: 15px 0;
@@ -105,13 +201,14 @@
             font-weight: bold;
         }
 
+        /* Hero Section */
         .hero {
             text-align: center;
-            padding: 60px 0;
+            padding: 40px 0;
         }
 
         .hero h1 {
-            font-size: 64px;
+            font-size: 48px;
             margin-bottom: 20px;
             background: linear-gradient(135deg, #fff, #888);
             -webkit-background-clip: text;
@@ -120,7 +217,7 @@
         }
 
         .hero p {
-            font-size: 20px;
+            font-size: 18px;
             color: #888;
             margin-bottom: 30px;
         }
@@ -147,6 +244,7 @@
             border-bottom: 1px dashed #888;
         }
 
+        /* Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -165,7 +263,6 @@
 
         .feature-card:hover {
             transform: translateY(-5px);
-            border-color: #ff416c;
         }
 
         .feature-card .number {
@@ -186,6 +283,7 @@
             font-size: 14px;
         }
 
+        /* Why Choose Us */
         .why-choose {
             margin: 80px 0;
             text-align: center;
@@ -223,17 +321,17 @@
             .features-grid, .features-desc {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .hero h1 {
-                font-size: 36px;
+            .header-content h1 {
+                font-size: 32px;
+            }
+            .nav-links {
+                display: none;
             }
         }
 
         @media (max-width: 480px) {
             .features-grid, .features-desc {
                 grid-template-columns: 1fr;
-            }
-            .nav-links {
-                display: none;
             }
             .hero-cta {
                 flex-direction: column;
@@ -243,21 +341,32 @@
 </head>
 <body>
     <div class="container">
-        <nav class="navbar">
-            <div class="logo">kimbongun.space</div>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/api">API</a>
-                <a href="/payment">Payment</a>
-                <button class="login-btn" onclick="window.location.href='/login'">Login</button>
-                <a href="/payment" class="get-access-btn">Get Access</a>
+        <!-- Header with background -->
+        <div class="header-bg">
+            <nav class="navbar">
+                <div class="logo">kimbongun.space</div>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/api">API</a>
+                    <a href="/payment">Payment</a>
+                    <a href="/login">Login</a>
+                    <a href="/payment" class="get-access-btn">Get Access</a>
+                </div>
+            </nav>
+            <div class="header-content">
+                <h1>Most Powerful Roblox DDoS</h1>
+                <div class="header-stats">
+                    <span>697+ active users</span> worldwide
+                </div>
             </div>
-        </nav>
+        </div>
 
+        <!-- Stats Bar -->
         <div class="stats-bar">
             <span>697 clients</span> active right now
         </div>
 
+        <!-- Hero Section -->
         <section class="hero">
             <h1>Most Powerful<br>Roblox DDoS</h1>
             <p>Advanced, undetectable, and blazingly fast. Professional-grade tooling<br>trusted by users worldwide.</p>
@@ -267,29 +376,31 @@
             </div>
         </section>
 
+        <!-- Features Grid with glow effect -->
         <div class="features-grid">
-            <div class="feature-card">
+            <div class="feature-card glow-wrapper">
                 <div class="number">100%</div>
                 <div class="label">Undetectable</div>
                 <div class="desc">Advanced encryption keeps your identity hidden</div>
             </div>
-            <div class="feature-card">
+            <div class="feature-card glow-wrapper">
                 <div class="number">99%</div>
                 <div class="label">Success Rate</div>
                 <div class="desc">Premium infrastructure for instant results</div>
             </div>
-            <div class="feature-card">
+            <div class="feature-card glow-wrapper">
                 <div class="number">24/7</div>
                 <div class="label">Always Online</div>
                 <div class="desc">Infrastructure never sleeps</div>
             </div>
-            <div class="feature-card">
+            <div class="feature-card glow-wrapper">
                 <div class="number">&lt;1s</div>
                 <div class="label">Response Time</div>
                 <div class="desc">Sub-second response times</div>
             </div>
         </div>
 
+        <!-- Why Choose Us -->
         <section class="why-choose">
             <h2>WHY CHOOSE US</h2>
             <p>Built different. The most reliable and powerful platform available.<br>Every detail engineered for performance.</p>
